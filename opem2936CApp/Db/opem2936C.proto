@@ -1,0 +1,27 @@
+# file: opem2936C.proto
+InTerminator=CR;
+OutTerminator=CR LF;
+ExtraInput=Ignore;
+
+idn         { out "*IDN?"             ;in "%39c"        ; }
+getPower    { out "PM:POWER?"         ;in "%E"          ; }
+getErrors   { out "ERR?"              ;in "%d"          ; }
+getChannel  { out "PM:CHAN?"          ;in "%{1|2}"      ; }
+setChannel  { out "PM:CHAN %{1|2}"                      ; }
+#setChannel  { out "PM:CHAN %{1|2}"    ;@init{ getChannel; }}
+getDetModel { out "PM:DETMODEL?"      ;in "%20c"        ; }
+getFreq     { out "PM:FREQ?"          ;in "%f"          ; }
+getLambda   { out "PM:LAMBDA?"        ;in "%d"          ; }
+setLambda   { out "PM:LAMBDA %d"                        ; }
+#setLambda   { out "PM:LAMBDA %d"      ;@init{ getLambda ; }}
+getMode     { out "PM:MODE?"          ;in "%d"          ; }
+getUnits    { out "PM:UNIT?"          ;in "%d"          ; }
+getMinPower { out "PM:MIN:POWER?"     ;in "%f"          ; }
+getZero     { out "PM:ZEROVAL?"       ;in "%f"          ; }
+setZeroStore{ out "PM:ZEROSTO"                          ; }
+getBeep     { out "BEEP?"             ;in "%{0|1}"      ; }
+setBeep     { out "BEEP %{0|1}"                         ; }
+#setBeep     { out "BEEP %{0|1}"       ;@init{ getBeep   ; }}
+getEcho     { out "ECHO?"             ;in "%{0|1}"      ; }
+setEcho     { out "ECHO %{0|1}"                         ; }
+#setEcho     { out "ECHO %{0|1}"       ;@init{ getEcho   ; }}

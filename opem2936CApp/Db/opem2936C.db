@@ -1,0 +1,172 @@
+record( stringin, "$(P):IDN"){
+  field( DESC, "SCPI id string")
+  field( DTYP, "stream")
+  field( INP,  "@opem2936C.proto idn $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):POWER"){
+  field( DESC, "Read Power")
+  field( DTYP, "stream")
+  field( SCAN, "1 second")
+  field( PREC, "6")
+  field( EGU,  "W")
+  field( INP,  "@opem2936C.proto getPower $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):ERRORS"){
+  field( DESC, "Read Error Code")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getErrors $(L) $(A)")
+  field( PINI, "YES")
+}
+record(bi,"$(P):BI:CHANNEL"){
+  field( DESC, "Read Channel")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getChannel $(L) $(A)")
+  field( ZNAM, "Ch.A")
+  field( ONAM, "Ch.B")
+  field( PINI, "YES")
+}
+record(bo,"$(P):BO:CHANNEL"){
+  field( DESC, "Set Channel")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( OUT,  "@opem2936C.proto setChannel $(L) $(A)")
+  field( ZNAM, "Ch.A")
+  field( ONAM, "Ch.B")
+  field( PINI, "YES")
+}
+record( stringin, "$(P):DETMODEL"){
+  field( DESC, "Read Detector Model")
+  field( DTYP, "stream")
+  #field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getDetModel $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):FREQ"){
+  field( DESC, "Frequency")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( PREC, "2")
+  field( EGU,  "Hz")
+  field( INP,  "@opem2936C.proto getFreq $(L) $(A)")
+  field( PINI, "YES")
+}
+#record( ao, "$(P):AO:LAMBDA"){
+#  field( DESC, "Set Wavelength")
+#  field( DTYP, "stream")
+#  field( EGU,  "nm")
+#  field( OUT,  "@opem2936C.proto setLambda $(L) $(A)")
+#  field( FLNK, "$(P):AI:LAMBDA.PROC  PP MS")
+#}
+#record( ai, "$(P):AI:LAMBDA"){
+#  field( DESC, "Read Wavelength")
+#  field( DTYP, "stream")
+#  field( EGU,  "nm")
+#  field( INP,  "@opem2936C.proto getLambda $(L) $(A)")
+#  field( PINI, "YES")
+#}
+#################################
+record( longout, "$(P):LO:SC:LAM"){
+  field( DESC, "Max Velo:")
+  field( OUT,  "$(P):LO:LAM PP")
+  field( DRVH, "50000")
+  field( DRVL, "0")
+}
+record( longout, "$(P):LO:LAM"){
+  field( SDIS, "$(P):LO:LAM:Sync.PACT")
+  field( DISV, "1")
+  field( DTYP, "stream")
+  field( OUT,  "@opem2936C.proto setLambda $(L) $(A)")
+}
+record( longin, "$(P):LI:LAM"){
+  field( DTYP, "stream")
+  field( INP,  "@opem2936C.proto getLambda $(L) $(A)")
+  field( SCAN, "1 second")
+  field( PINI, "1")
+  field( FLNK, "$(P):LO:LAM:Sync")
+}
+record( longout, "$(P):LO:LAM:Sync"){
+  field( DOL,  "$(P):LI:LAM NPP")
+  field( OMSL, "closed_loop")
+  field( OUT,  "$(P):LO:SC:LAM PP")
+}
+###################
+record( ai, "$(P):MODE"){
+  field( DESC, "Acquisition Mode")
+  field( DTYP, "stream")
+  #field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getMode $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):UNITS"){
+  field( DESC, "Units")
+  field( DTYP, "stream")
+  #field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getUnits $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):RES"){
+  field( DESC, "Minimum Power")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( PREC, "6")
+  field( EGU,  "W")
+  field( INP,  "@opem2936C.proto getMinPower $(L) $(A)")
+  field( PINI, "YES")
+}
+record( ai, "$(P):AI:ZERO"){
+  field( DESC, "Zero Value")
+  field( DTYP, "stream")
+  field( PREC, "6")
+  field( EGU,  "W")
+  field( INP,  "@opem2936C.proto getZero $(L) $(A)")
+  field( PINI, "YES")
+}
+record(bo,"$(P):BO:ZEROSTORE"){
+  field( DESC, "Store Zero")
+  field( DTYP, "stream")
+  field( OUT,  "@opem2936C.proto setZeroStore $(L) $(A)")
+  field( FLNK, "$(P):AI:ZERO.PROC  PP MS")
+  field( ZNAM, "Zero")
+  field( ONAM, "Done")
+}
+record(bi,"$(P):BI:BEEP"){
+  field( DESC, "Read Beep")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getBeep $(L) $(A)")
+  field( ZNAM, "Off")
+  field( ONAM, "On")
+  field( PINI, "YES")
+}
+record(bo,"$(P):BO:BEEP"){
+  field( DESC, "Set Beep")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( OUT,  "@opem2936C.proto setBeep $(L) $(A)")
+  field( ZNAM, "Off")
+  field( ONAM, "On")
+  field( PINI, "YES")
+}
+record(bi,"$(P):BI:ECHO"){
+  field( DESC, "Read Echo")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( INP,  "@opem2936C.proto getEcho $(L) $(A)")
+  field( ZNAM, "Off")
+  field( ONAM, "On")
+  field( PINI, "YES")
+}
+record(bo,"$(P):BO:ECHO"){
+  field( DESC, "Set Echo")
+  field( DTYP, "stream")
+  field( SCAN, "10 second")
+  field( OUT,  "@opem2936C.proto setEcho $(L) $(A)")
+  field( ZNAM, "Off")
+  field( ONAM, "On")
+  field( PINI, "YES")
+}
+

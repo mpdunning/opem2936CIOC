@@ -1,0 +1,1 @@
+The IOC names sioc-esb-opemXX are shared between $IOCTOP/opem2936C and $IOCTOP/opem842.  Take note when creating a new IOC instance.
